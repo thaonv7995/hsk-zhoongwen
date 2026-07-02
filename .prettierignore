@@ -1,0 +1,5 @@
+dist
+node_modules
+src/data/vocabulary.json
+src/data/roots.json
+package-lock.json
