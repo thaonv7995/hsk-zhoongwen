@@ -36,6 +36,6 @@ export type WordFamily = {
   members: VocabularyWord[];
 };
 
-export type AppView = "families" | "dictionary" | "practice";
+export type AppView = "families" | "dictionary" | "practice" | "settings";
 
 export type FamilyRange = "all" | "level";

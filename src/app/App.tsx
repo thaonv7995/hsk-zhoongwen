@@ -5,6 +5,7 @@ import { HSK_LEVELS } from "../constants/hsk";
 import { DictionaryView } from "../features/dictionary/DictionaryView";
 import { FamilyExplorer } from "../features/families/FamilyExplorer";
 import { PracticeView } from "../features/practice/PracticeView";
+import { SettingsView } from "../features/settings/SettingsView";
 import { useKnownWords } from "../hooks/useKnownWords";
 import { wordMatchesQuery } from "../lib/search";
 import { buildFamilies, compareWords, findBestFamilyForWord } from "../lib/vocabulary";
@@ -147,7 +148,9 @@ export default function App() {
                   ? `${currentFamily?.root ?? "—"} · ${currentFamily?.rootWord.pinyin ?? ""}`
                   : view === "dictionary"
                     ? "Từ điển"
-                    : "Luyện tập"}
+                    : view === "settings"
+                      ? "Cài đặt"
+                      : "Luyện tập"}
               </strong>
             </div>
             <h1>Một chữ, nhiều kết nối.</h1>
@@ -172,6 +175,11 @@ export default function App() {
               active={view === "practice"}
               label="Luyện tập"
               onClick={() => setView("practice")}
+            />
+            <ViewTab
+              active={view === "settings"}
+              label="Cài đặt"
+              onClick={() => setView("settings")}
             />
           </div>
         </section>
@@ -204,6 +212,8 @@ export default function App() {
         {view === "practice" ? (
           <PracticeView words={scopeWords} knownWords={knownWords} onToggleKnown={toggleKnown} />
         ) : null}
+
+        {view === "settings" ? <SettingsView /> : null}
       </main>
     </div>
   );
