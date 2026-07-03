@@ -1752,3 +1752,48 @@ kbd {
     transition: none !important;
   }
 }
+
+/* Settings */
+
+.settings-card {
+  padding: 30px;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+  margin-top: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555861;
+  font-size: 13px;
+}
+
+.form-group label strong {
+  color: var(--coral);
+}
+
+.form-group input[type="range"] {
+  width: 100%;
+  accent-color: var(--coral);
+}
+
+.form-group select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #dcd5cc;
+  border-radius: 12px;
+  background: white;
+  font-size: 13px;
+}
+
+.setting-note {
+  margin: 6px 0 0;
+  color: #9297a3;
+  font-size: 11px;
+}
