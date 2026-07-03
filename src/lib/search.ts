@@ -10,20 +10,26 @@ export function normalizeSearch(value: string): string {
     .trim();
 }
 
+const searchCache = new WeakMap<VocabularyWord, string>();
+
 export function wordMatchesQuery(word: VocabularyWord, rawQuery: string): boolean {
   const query = normalizeSearch(rawQuery);
   if (!query) return true;
 
-  const searchable = normalizeSearch(
-    [
-      word.simplified,
-      word.traditional,
-      word.pinyin,
-      word.meaningVi,
-      word.meaningEn,
-      word.context?.zh ?? "",
-      word.context?.vi ?? "",
-    ].join(" "),
-  );
+  let searchable = searchCache.get(word);
+  if (searchable === undefined) {
+    searchable = normalizeSearch(
+      [
+        word.simplified,
+        word.traditional,
+        word.pinyin,
+        word.meaningVi,
+        word.meaningEn,
+        word.context?.zh ?? "",
+        word.context?.vi ?? "",
+      ].join(" "),
+    );
+    searchCache.set(word, searchable);
+  }
   return searchable.includes(query);
 }
