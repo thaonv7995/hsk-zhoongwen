@@ -84,3 +84,28 @@ Lệnh trên chạy lần lượt:
 ## Nguồn dữ liệu
 
 Xem [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Không có ảnh hoặc audio từ nguồn ngoài được đóng gói vào app.
+
+## Cài đặt trên Server Debian
+
+Để cài đặt ứng dụng chạy như một process nền trên server Debian tại port `29579`, hãy kết nối vào server và chạy câu lệnh sau bằng quyền root hoặc sudo:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/thaonv7995/hsk-zhoongwen/main/install.sh | sudo bash
+```
+
+Sau khi cài đặt xong, ứng dụng sẽ chạy ngầm bằng `systemd` và có thể truy cập qua `http://<IP_CỦA_SERVER>:29579`.
+Lệnh trên cũng tự động tạo ra một CLI tool tên là `zizhi-hsk` giúp bạn dễ dàng quản lý sau này:
+
+- **Cập nhật lên bản mới nhất:**
+  ```bash
+  sudo zizhi-hsk update
+  ```
+- **Gỡ bỏ ứng dụng:**
+  ```bash
+  sudo zizhi-hsk remove
+  ```
+- **Xem trạng thái / log của tiến trình:**
+  ```bash
+  sudo systemctl status zizhi-hsk
+  sudo journalctl -u zizhi-hsk -f
+  ```
