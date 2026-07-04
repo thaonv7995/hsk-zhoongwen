@@ -70,9 +70,6 @@ export function FamilyExplorer({
               Các từ có chữ <span>{family.root}</span>
             </h2>
           </div>
-          <button className="sound-button" type="button" onClick={() => speakChinese(family.root)}>
-            ♪ Nghe chữ gốc
-          </button>
         </div>
 
         {activeLevel ? (

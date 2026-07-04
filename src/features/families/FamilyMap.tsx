@@ -1,4 +1,5 @@
 import { LEVEL_COLORS } from "../../constants/hsk";
+import { speakChinese } from "../../lib/speech";
 import type { VocabularyWord, WordFamily } from "../../types/vocabulary";
 
 const POSITIONS = [
@@ -46,11 +47,11 @@ export function FamilyMap({
         })}
       </svg>
 
-      <div className="root-node">
+      <button className="root-node" type="button" onClick={() => speakChinese(family.root)}>
         <span className="root-char">{family.root}</span>
         <span className="root-pinyin">{family.rootWord.pinyin}</span>
         <span className="root-meaning">{family.rootWord.meaningVi}</span>
-      </div>
+      </button>
 
       {visibleWords.map((word, index) => {
         const position = POSITIONS[index];
@@ -60,7 +61,10 @@ export function FamilyMap({
             className={`word-node ${word.id === selectedWordId ? "active" : ""}`}
             type="button"
             key={word.id}
-            onClick={() => onWordChange(word.id)}
+            onClick={() => {
+              speakChinese(word.simplified);
+              onWordChange(word.id);
+            }}
             style={
               {
                 left: `${position.x}%`,

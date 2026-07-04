@@ -686,6 +686,12 @@ kbd {
   border-radius: 50%;
   background: var(--coral);
   box-shadow: 0 14px 34px rgba(231, 111, 81, 0.31);
+  cursor: pointer;
+  transition: transform 160ms ease;
+}
+
+.root-node:hover {
+  transform: translate(-50%, -50%) scale(1.04);
 }
 
 .root-node::after {
