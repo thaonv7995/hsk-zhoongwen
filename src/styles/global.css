@@ -1254,7 +1254,8 @@ kbd {
 /* Practice */
 
 .practice-card {
-  max-width: 880px;
+  max-width: 1100px;
+  width: 100%;
   margin: 0 auto;
   padding: 27px;
 }
@@ -1436,6 +1437,31 @@ kbd {
 .primary-button:disabled {
   cursor: not-allowed;
   opacity: 0.35;
+}
+
+.secondary-button {
+  padding: 11px 15px;
+  cursor: pointer;
+  color: var(--indigo);
+  border: 1px solid var(--border, #d9d1c7);
+  border-radius: 10px;
+  background: white;
+  font-size: 12px;
+  font-weight: 700;
+  transition: all 160ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.secondary-button:hover {
+  background: var(--paper, #fcfbf9);
+  border-color: var(--text-light, #a09a93);
+}
+
+.secondary-button:active {
+  background: #e5ded6;
 }
 
 /* Responsive */

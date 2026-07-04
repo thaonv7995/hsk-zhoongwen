@@ -39,7 +39,10 @@ function createQuestion(words: VocabularyWord[], seed: number): QuizQuestion | n
   return { answer, options: shuffled([answer, ...distractors], seed + 31) };
 }
 
+import { TypingPractice } from "./TypingPractice";
+
 export function PracticeView({ words, knownWords, onToggleKnown }: PracticeViewProps) {
+  const [mode, setMode] = useState<"quiz" | "typing">("typing");
   const [questionSeed, setQuestionSeed] = useState(0);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [correct, setCorrect] = useState(0);
@@ -64,21 +67,42 @@ export function PracticeView({ words, knownWords, onToggleKnown }: PracticeViewP
   };
 
   return (
-    <section className="practice-card">
-      <div className="practice-heading">
-        <div>
-          <span className="eyebrow">ÔN NHANH</span>
-          <h2>Chọn nghĩa đúng</h2>
-        </div>
-        <div className="session-score">
-          <small>Phiên này</small>
-          <strong>
-            {correct}/{total}
-          </strong>
-        </div>
+    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+      <div className="practice-mode-switch" style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+        <button 
+          className={`secondary-button ${mode === "typing" ? "active" : ""}`}
+          onClick={() => setMode("typing")}
+          style={mode === "typing" ? { background: "var(--coral)", color: "white", borderColor: "var(--coral)" } : {}}
+        >
+          Luyện gõ
+        </button>
+        <button 
+          className={`secondary-button ${mode === "quiz" ? "active" : ""}`}
+          onClick={() => setMode("quiz")}
+          style={mode === "quiz" ? { background: "var(--coral)", color: "white", borderColor: "var(--coral)" } : {}}
+        >
+          Trắc nghiệm
+        </button>
       </div>
 
-      <div className="quiz-stage">
+      {mode === "typing" ? (
+        <TypingPractice words={words} />
+      ) : (
+        <section className="practice-card">
+          <div className="practice-heading">
+            <div>
+              <span className="eyebrow">ÔN NHANH</span>
+              <h2>Chọn nghĩa đúng</h2>
+            </div>
+            <div className="session-score">
+              <small>Phiên này</small>
+              <strong>
+                {correct}/{total}
+              </strong>
+            </div>
+          </div>
+
+          <div className="quiz-stage">
         <span className="quiz-level">HSK {question.answer.level}</span>
         <button
           className="round-button quiz-sound"
@@ -137,5 +161,7 @@ export function PracticeView({ words, knownWords, onToggleKnown }: PracticeViewP
         </div>
       </div>
     </section>
+      )}
+    </div>
   );
 }
