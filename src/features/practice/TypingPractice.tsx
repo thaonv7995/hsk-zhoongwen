@@ -61,7 +61,9 @@ export function TypingPractice({ words }: TypingPracticeProps) {
     const shuffled = [...filteredTasks];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      const temp = shuffled[i] as TypingTask;
+      shuffled[i] = shuffled[j] as TypingTask;
+      shuffled[j] = temp;
     }
     return shuffled;
   }, [filteredTasks]);
